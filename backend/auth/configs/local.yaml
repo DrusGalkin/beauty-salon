@@ -1,0 +1,8 @@
+env: "prod"
+grpc:
+  port: "50051"
+  timeout: 30s
+
+jwt:
+  access_ttl: 1h
+  refresh_ttl: 48h

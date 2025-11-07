@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+option go_package = "../generate";
+
+
+service AuthService {
+  rpc Refresh(TokenRequest) returns (TokensResponse);
+  rpc Register(RegRequest) returns (RegResponse);
+  rpc Login(LogRequest) returns (LogResponse);
+  rpc Logout(OutRequest) returns (OutResponse);
+  rpc ValidToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+  rpc IsAdmin(IDRequest) returns (IsAdminResponse);
+}
+
+message LogRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LogResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 expires_in = 3;
+}
+
+message TokenRequest {
+  string refresh_token = 1;
+}
+
+message TokensResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 expires_in = 3;
+}
+
+message RegRequest {
+  string email = 1;
+  string name = 2;
+  string password = 3;
+}
+
+message RegResponse {
+  int64 id = 1;
+}
+
+message OutRequest {
+  int64 id = 1;
+}
+
+message OutResponse {
+  bool exist = 1;
+}
+
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+message ValidateTokenResponse {
+  int64 id = 1;
+  string email = 2;
+}
+
+message IDRequest {
+  int64 id = 1;
+}
+
+message IsAdminResponse {
+  bool isAdmin = 1;
+}

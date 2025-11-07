@@ -1,0 +1,12 @@
+env: "local"
+http:
+  port: "8099"
+  timeout: 30s
+grpc:
+  port: "50051"
+  network: "auth"
+  timeout: 30s
+  timeout-start: 30s
+redis:
+  ttl: 20s
+

@@ -1,0 +1,11 @@
+mail:
+    host: "smtp.mail.ru"
+    port: 465
+    host_user: "drus.galkin@mail.ru"
+    from: "drus.galkin@mail.ru"
+    subject: "OldMine - Подтверждение email"
+redis:
+    ttl: 5m
+    timeout: 30s
+server:
+    port: 8084

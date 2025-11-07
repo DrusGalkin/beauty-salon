@@ -1,0 +1,11 @@
+const env = import.meta.env;
+
+export const TOKEN_RECAPTCHA = env.VITE_RECAPTCHA_SITE_KEY
+
+export const AUTH_URL = env.VITE_AUTH_SERVICE
+export const OTHER_URL = env.VITE_OTHER_SERVICE
+export const CATEGORIES_URL = env.VITE_CATEGORIES_SERVICE
+export const MAIL_SENDER_URL = env.VITE_MAIL_SENDER_SERVICE
+export const PHOTOS_URL = env.VITE_PHOTOS_SERVICE
+export const REVIEWS_URL = env.VITE_REVIEWS_SERVICE
+export const SERVICES_URL = env.VITE_SERVICES

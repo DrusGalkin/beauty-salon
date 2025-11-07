@@ -1,0 +1,40 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "prebuild": "npm install vite@^6.3.5 --save-dev",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "animate.css": "^4.1.1",
+    "axios": "^1.12.2",
+    "js-cookie": "^3.0.5",
+    "react": "^19.1.0",
+    "react-awesome-reveal": "^4.3.1",
+    "react-dom": "^19.1.0",
+    "react-google-recaptcha": "^3.1.0",
+    "react-router-dom": "^7.6.3",
+    "swiper": "^11.2.10",
+    "tailwindcss": "^4.1.11",
+    "tailwindcss-animate": "^1.0.7",
+    "wowjs": "^1.1.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "vite": "^6.3.5"
+  }
+}

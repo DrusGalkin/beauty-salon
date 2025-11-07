@@ -1,0 +1,155 @@
+name: "Estetika"
+
+
+services:
+  auth:
+    build: ./backend/auth
+    ports:
+      - "50051:50051"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: on-failure
+    networks:
+      - grpc
+
+
+  migrator:
+    build: ./backend/migrator
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - grpc
+
+  user:
+    build: ./backend/users
+    ports:
+      - "8099:8099"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      auth:
+        condition: service_started
+    networks:
+      - grpc
+
+  mail-sender:
+    build: ./backend/mail-sender
+    ports:
+      - "8084:8084"
+    depends_on:
+      redis:
+        condition: service_started
+    networks:
+      - grpc
+
+  photos:
+    build: ./backend/photos
+    ports:
+      - "8069:8069"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - grpc
+    volumes:
+      - photo_data:/var/lib/photos/uploads
+
+  services:
+    build: ./backend/services
+    ports:
+      - "8019:8019"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      auth:
+        condition: service_started
+    networks:
+      - grpc
+
+#  frontend:
+#    build: frontend
+#    ports:
+#      - "5173:5173"
+#    networks:
+#      - grpc
+
+  other:
+    build: ./backend/other
+    ports:
+      - "7000:7000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      auth:
+        condition: service_started
+    networks:
+      - grpc
+
+  reviews:
+    build: ./backend/reviews
+    ports:
+      - "8022:8022"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      auth:
+        condition: service_started
+    networks:
+      - grpc
+
+  postgres:
+    image: postgres:16
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - grpc
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - grpc
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: 1
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - grpc
+
+volumes:
+  photo_data:
+  redis_data:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  grpc:
+    driver: bridge

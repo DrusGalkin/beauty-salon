@@ -1,0 +1,9 @@
+env: "local"
+server:
+  port: "8019"
+  timeout: 5s
+grpc:
+  port: "50051"
+  network: "auth"
+  timeout: 30s
+  timeout-start: 30s
