@@ -72,12 +72,12 @@ services:
     networks:
       - grpc
 
-#  frontend:
-#    build: frontend
-#    ports:
-#      - "5173:5173"
-#    networks:
-#      - grpc
+  frontend:
+    build: frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - grpc
 
   other:
     build: ./backend/other
